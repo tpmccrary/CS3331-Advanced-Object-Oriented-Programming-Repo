@@ -1,7 +1,7 @@
 package edu.utep.cs.cs3331;
 
 import java.text.DecimalFormat;
-import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ConsoleUi 
@@ -9,28 +9,25 @@ public class ConsoleUi
 
 	public void welcomeMessage() 
 	{
-		// TODO Auto-generated method stub
 		System.out.println("Welcome to Price Watcher!");
 		
 	}
 
 	public void showItemDetails(Item item) 
 	{
-		// TODO Auto-generated method stub
 		DecimalFormat numFormat = new DecimalFormat("#,###,###,##0.00");
 		
-		System.out.println("______________________________\n" +
+		System.out.println("________________________________________\n" +
 				"Name: " + item.getItemName() + "\n" +
 				"URL: " + item.getUrl() + "\n" +
 				"Price: $" + numFormat.format(item.getCurrentPrice()) + "\n" +
 				"Change: " + numFormat.format(item.getPriceChange()) + "%\n" +
 				"Date Added: " + item.getDateAdded() + "\n" +
-				"______________________________\n");
+				"________________________________________\n");
 	}
 
 	public int promptUserChoice() 
 	{
-		// TODO Auto-generated method stub
 		System.out.println("Please enter \"1\" to update price,\"2\" to visit webpage, and \"0\" to exit: ");
 		Scanner userInput = new Scanner(System.in);
 		
@@ -40,10 +37,11 @@ public class ConsoleUi
 		{
 			choice = userInput.nextInt();
 		}
-		catch(InputMismatchException e)
+		catch(NoSuchElementException e )
 		{
 			System.out.println("INVALID INPUT: Must be number 1, 2, or 0.");
-			choice = promptUserChoice();
+			//choice = promptUserChoice();
+			return -1;
 		}
 		
 		return choice;
@@ -62,7 +60,6 @@ public class ConsoleUi
 
 	public String promptUserItemName() 
 	{
-		// TODO Auto-generated method stub
 		System.out.println("Please enter your item name: ");
 		Scanner userInput = new Scanner(System.in);
 		
@@ -73,17 +70,15 @@ public class ConsoleUi
 
 	public void exitMessage()
 	{
-		// TODO Auto-generated method stub
 		System.out.println("Thank you and have a nice day!");
 	}
 
-	public void notValidInputMessage(int userChoice)
+	public void notValidInputMessage()
 	{
-		// TODO Auto-generated method stub
-		System.out.println("NOT A VALID INPUT: " + userChoice);
+		System.out.println("INVALID INPUT: Must be number 1, 2, or 0.");
 	}
 	
-	public void notValidUrl()
+	public void notValidUrlMessage()
 	{
 		System.out.println("Not a valid URL.");
 	}

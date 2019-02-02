@@ -37,9 +37,8 @@ public class Main
 				} 
 				catch (IOException | URISyntaxException | InputMismatchException e)
 				{
-					// TODO Auto-generated catch block
 					//e.printStackTrace();
-					ui.notValidUrl();
+					ui.notValidUrlMessage();
 					item.setUrl(ui.promptUserForUrl());
 					
 				}
@@ -51,7 +50,7 @@ public class Main
 			}
 			else
 			{
-				ui.notValidInputMessage(userChoice);
+				ui.notValidInputMessage();
 			}
 			
 		}
@@ -62,21 +61,6 @@ public class Main
 		 * prompt the user
 		 * process
 		 */
-//		int request = -1;
-//		do
-//		{
-//			ui.showItem();
-//			request = ui.promptUser();
-//			
-//			switch(request)
-//			{
-//			case 1:
-//				break;
-//			case 2:
-//				break;
-//			}
-//		}
-//		while(request != -1);
 		
 		
 		
@@ -94,7 +78,7 @@ public class Main
 		itemPrice = priceFinder.getPrice();
 		
 		String day = String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-		String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH));
+		String month = String.valueOf((Calendar.getInstance().get(Calendar.MONTH) + 1));
 		String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 		
 		item.setItemName(itemName);

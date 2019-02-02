@@ -1,7 +1,5 @@
 package edu.utep.cs.cs3331;
 
-import java.util.Calendar;
-
 public class Item 
 {
 	private String itemName;
@@ -18,15 +16,6 @@ public class Item
 	
 	public double getPriceChange()
 	{
-//		if(oldPrice == currentPrice)
-//		{
-//			return 0.0;
-//		}
-//		else if(currentPrice == 0)
-//		{
-//			return 100;
-//		}
-		
 		double change = (oldPrice - currentPrice) / oldPrice;
 		
 		change = change * 100;
