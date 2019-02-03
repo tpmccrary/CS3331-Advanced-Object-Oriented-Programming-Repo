@@ -1,5 +1,8 @@
 package edu.utep.cs.cs3331;
 
+import java.text.DecimalFormat;
+import java.util.Calendar;
+
 public class Item 
 {
 	private String itemName;
@@ -11,7 +14,17 @@ public class Item
 	public Item()
 	{
 		
+	}
+	
+	public void generateDateAdded()
+	{
+		DecimalFormat numFormat = new DecimalFormat("#,###,###,##0.00");
 		
+		String day = String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+		String month = String.valueOf((Calendar.getInstance().get(Calendar.MONTH) + 1));
+		String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+		
+		dateAdded = month + "/" + day + "/" + year + "  ($" + numFormat.format(currentPrice) + ")";
 	}
 	
 	public double getPriceChange()

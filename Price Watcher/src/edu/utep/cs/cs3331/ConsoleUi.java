@@ -39,7 +39,7 @@ public class ConsoleUi
 		}
 		catch(NoSuchElementException e )
 		{
-			System.out.println("INVALID INPUT: Must be number 1, 2, or 0.");
+			//System.out.println("INVALID INPUT: Must be number 1, 2, or 0.");
 			//choice = promptUserChoice();
 			return -1;
 		}

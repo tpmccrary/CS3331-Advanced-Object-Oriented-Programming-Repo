@@ -67,25 +67,19 @@ public class Main
 	}
 
 	public Item generateItem(Item item, ConsoleUi ui, PriceFinder priceFinder)
-	{
-		DecimalFormat numFormat = new DecimalFormat("#,###,###,##0.00");
-		
+	{		
 		String itemUrl;
 		String itemName;
 		double itemPrice;
 		itemUrl = ui.promptUserForUrl();
 		itemName = ui.promptUserItemName();
 		itemPrice = priceFinder.getPrice();
-		
-		String day = String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-		String month = String.valueOf((Calendar.getInstance().get(Calendar.MONTH) + 1));
-		String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-		
+
 		item.setItemName(itemName);
 		item.setUrl(itemUrl);
 		item.setCurrentPrice(itemPrice);
 		item.setOldPrice(itemPrice);
-		item.setDateAdded(month + "/" + day + "/" + year + "  ($" + numFormat.format(itemPrice) + ")");
+		item.generateDateAdded(); 
 		
 		return item;
 	}
