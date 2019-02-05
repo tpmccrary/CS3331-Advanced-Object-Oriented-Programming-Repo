@@ -1,3 +1,5 @@
+// Timothy P. McCrary
+
 package edu.utep.cs.cs3331;
 
 import java.text.DecimalFormat;
