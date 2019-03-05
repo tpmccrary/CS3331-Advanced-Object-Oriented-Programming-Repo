@@ -11,15 +11,19 @@ public class Item
 	private String itemName;
 	private String url;
 	private double currentPrice;
-	private double oldPrice;
+	private double originalPrice;
 	private String dateAdded;
 	
-	public Item()
+	public Item(String itemName, String url, double currentPrice)
 	{
-		
+		this.itemName = itemName;
+		this.url = url;
+		this.currentPrice = currentPrice;
+		this.originalPrice = currentPrice;
+		this.dateAdded = generateDateAdded();
 	}
 	
-	public void generateDateAdded()
+	public String generateDateAdded()
 	{
 		DecimalFormat numFormat = new DecimalFormat("#,###,###,##0.00");
 		
@@ -27,17 +31,11 @@ public class Item
 		String month = String.valueOf((Calendar.getInstance().get(Calendar.MONTH) + 1));
 		String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 		
-		dateAdded = month + "/" + day + "/" + year + "  ($" + numFormat.format(currentPrice) + ")";
+		String dateAddedAndPrice = month + "/" + day + "/" + year + "  ($" + numFormat.format(currentPrice) + ")";
+		
+		return dateAddedAndPrice;
 	}
 	
-	public double getPriceChange()
-	{
-		double change = (oldPrice - currentPrice) / oldPrice;
-		
-		change = change * 100;
-		
-		return change;
-	}
 
 	public String getItemName() 
 	{
@@ -69,14 +67,14 @@ public class Item
 		this.currentPrice = currentPrice;
 	}
 
-	public double getOldPrice() 
+	public double getOriginalPrice() 
 	{
-		return oldPrice;
+		return originalPrice;
 	}
 
-	public void setOldPrice(double oldPrice) 
+	public void setOriginalPrice(double oldPrice) 
 	{
-		this.oldPrice = oldPrice;
+		this.originalPrice = oldPrice;
 	}
 
 	public String getDateAdded()
