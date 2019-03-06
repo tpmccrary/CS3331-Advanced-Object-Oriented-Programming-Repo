@@ -1,10 +1,12 @@
 // Timothy P. McCrary
 
-package edu.utep.cs.cs3331;
+package commandpromptui;
 
 import java.text.DecimalFormat;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import edu.utep.cs.cs3331.Item;
 
 public class ConsoleUi 
 {

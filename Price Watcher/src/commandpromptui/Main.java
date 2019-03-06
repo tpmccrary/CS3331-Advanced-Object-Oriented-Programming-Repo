@@ -1,10 +1,14 @@
 // Timothy P. McCrary
 
-package edu.utep.cs.cs3331;
+package commandpromptui;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.InputMismatchException;
+
+import edu.utep.cs.cs3331.Item;
+import edu.utep.cs.cs3331.PriceFinder;
+
 import java.net.URL;
 
 
