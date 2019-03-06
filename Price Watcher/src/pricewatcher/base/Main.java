@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import edu.utep.cs.cs3331.ComparePrice;
 import edu.utep.cs.cs3331.Item;
 import edu.utep.cs.cs3331.PriceFinder;
 import edu.utep.cs.cs3331.VisitUrl;
@@ -40,7 +41,12 @@ public class Main extends JFrame {
     	this(DEFAULT_SIZE);
     }
     
-  
+    
+    Item item = new Item("Logitech G610 Mechanical Keyboard",
+    		"https://www.amazon.com/dp/B01CDYB8F6/?coliid=I3G9LP6LLUKNWS&colid=39N3ZBJ0BPD51&psc=0&ref_=lv_ov_lig_dp_it", 
+    		PriceFinder.getPrice());
+    
+    
     
     /** Create a new dialog of the given screen dimension. */
     public Main(Dimension dim) {
@@ -52,8 +58,13 @@ public class Main extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         //setResizable(false);
-        showMessage("Welcome!");
+        showMessage("Welcome!"); 
+        
+        itemView.getItem(item);
+        
+        
     }
+    
   
     /** Callback to be invoked when the refresh button is clicked. 
      * Find the current price of the watched item and display it 
@@ -63,9 +74,11 @@ public class Main extends JFrame {
     	//-- WRITE YOUR CODE HERE!
     	//--
     	
+    	item.setCurrentPrice(PriceFinder.getPrice());
+    	ComparePrice.getPriceChange(item.getCurrentPrice(), item.getOriginalPrice());
     	
-    	
-    	showMessage("Refresh clicked!");
+    	showMessage("Prices Updated!");
+    	super.repaint();
     }
     
     /** Callback to be invoked when the view-page icon is clicked.
@@ -76,10 +89,11 @@ public class Main extends JFrame {
     	//-- WRITE YOUR CODE HERE!
     	//--
     	
-    	VisitUrl.goToUrl("https://www.amazon.com/dp/B01CDYB8F6/?coliid=I3G9LP6LLUKNWS&colid=39N3ZBJ0BPD51&psc=0&ref_=lv_ov_lig_dp_it");
+    	VisitUrl.goToUrl(item.getUrl());
     	
     	showMessage("Going to website!");
     }
+    
         
     /** Configure UI. */
     private void configureUI() {

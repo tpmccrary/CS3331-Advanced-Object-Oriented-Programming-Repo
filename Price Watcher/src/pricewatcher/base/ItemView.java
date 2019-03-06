@@ -56,11 +56,11 @@ public class ItemView extends JPanel {
     	this.listener = listener;
     }
     
+    // Formats numbers to look nice.
     DecimalFormat numFormat = new DecimalFormat("#,###,###,##0.00");
     
-    Item item = new Item("Logitech G610 Mechanical Keyboard",
-    		"https://www.amazon.com/dp/B01CDYB8F6/?coliid=I3G9LP6LLUKNWS&colid=39N3ZBJ0BPD51&psc=0&ref_=lv_ov_lig_dp_it", 
-    		PriceFinder.getPrice());
+    // Declares Item variable to store Item object.
+    Item item;
     
     /** Overridden here to display the details of the item. */
     @Override
@@ -76,7 +76,7 @@ public class ItemView extends JPanel {
         
         int x = 20, y = 30;
         // g.drawImage(getImage("view.png"), x, y)
-        Image image = getImage("file:///C:/Users/Timothy%20P.%20McCrary/git/CS3331-Advanced-Object-Oriented-Programming-Repo/Price%20Watcher/src/image/keyboard.jpg");
+        Image image = getImage("keyboard.jpg");
         g.drawImage(image, x, y - 30, 128, 64, this);
         //g.setFont(getFont().deriveFont(Font.BOLD));
         //g.drawString("[View]", x, y);
@@ -85,11 +85,24 @@ public class ItemView extends JPanel {
         y += 20;
         g.drawString("URL: " + item.getUrl(), x, y);
         y += 20;
-        g.drawString("Price: " + String.valueOf(numFormat.format(item.getCurrentPrice())), x, y);
+        
+        if (item.getCurrentPrice() < item.getOriginalPrice())
+        {
+        	g.drawString("Price: ", x, y);
+        	g.setColor(Color.BLUE);
+        	g.drawString("$" + String.valueOf(numFormat.format(item.getCurrentPrice())), x + 34, y);
+        	g.setColor(Color.BLACK);
+        }
+        else
+        {
+        	g.drawString("Price: $" + String.valueOf(numFormat.format(item.getCurrentPrice())), x, y);
+        }
+        
         y += 20;
-        g.drawString("Change: " + String.valueOf(ComparePrice.getPriceChange(item.getCurrentPrice(), item.getOriginalPrice())), x, y);
+        g.drawString("Change: " + String.valueOf(numFormat.format(ComparePrice.getPriceChange(item.getCurrentPrice(), item.getOriginalPrice()))) + "%", x, y);
         y += 20;
-        g.drawString("Date Added: " + item.getDateAdded(), x, y);
+        g.drawString("Added: " + item.getDateAdded(), x, y);
+        
         
     }
     
@@ -99,9 +112,15 @@ public class ItemView extends JPanel {
     	//-- WRITE YOUR CODE HERE
     	//--
     	
-    	
     	return new Rectangle(20, 0, 128, 64).contains(x,  y);
     }
+    
+    // Getter for the Item object 
+    public void getItem(Item item)
+    {
+    	this.item = item;
+    }
+    
         
     /** Return the image stored in the given file. */
     public Image getImage(String file) {

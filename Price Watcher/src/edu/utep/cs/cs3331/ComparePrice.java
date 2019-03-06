@@ -10,4 +10,6 @@ public class ComparePrice
 		
 		return change;
 	}
+	
+	
 }
