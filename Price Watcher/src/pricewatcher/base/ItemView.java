@@ -1,3 +1,5 @@
+//Timothy P. McCrary
+
 package pricewatcher.base;
 
 import java.awt.Color;

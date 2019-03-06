@@ -1,3 +1,5 @@
+//Timothy P. McCrary
+
 package pricewatcher.base;
 
 import java.awt.BorderLayout;
@@ -89,7 +91,7 @@ public class Main extends JFrame {
     	//-- WRITE YOUR CODE HERE!
     	//--
     	
-    	VisitUrl.goToUrl(item.getUrl());
+    	VisitUrl.goToUrl(item);
     	
     	showMessage("Going to website!");
     }

@@ -1,3 +1,5 @@
+//Timothy P. McCrary
+
 package edu.utep.cs.cs3331;
 
 import java.io.IOException;
@@ -23,19 +25,5 @@ public class VisitUrl
 		}
 	}
 	
-	public static void goToUrl(String url)
-	{
-		try
-		{
-			java.awt.Desktop.getDesktop().browse(new URL(url).toURI());
-		} 
-		catch (IOException | URISyntaxException | InputMismatchException e)
-		{
-			//e.printStackTrace();
-//			ui.notValidUrlMessage();
-//			item.setUrl(ui.promptUserForUrl());
-			System.out.println("Not a valid URL.");
-			
-		}
-	}
+	
 }
