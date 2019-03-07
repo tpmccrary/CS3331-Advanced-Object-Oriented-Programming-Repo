@@ -1,6 +1,6 @@
 //Timothy P. McCrary
 
-package pricewatcher.base;
+package edu.utep.cs.cs3331;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -9,17 +9,13 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
+import javax.sound.sampled.AudioSystem;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
-import edu.utep.cs.cs3331.ComparePrice;
-import edu.utep.cs.cs3331.Item;
-import edu.utep.cs.cs3331.PriceFinder;
-import edu.utep.cs.cs3331.VisitUrl;
 
 /**
 * A dialog for tracking the price of an item.
@@ -47,6 +43,8 @@ public class Main extends JFrame {
     Item item = new Item("Logitech G610 Mechanical Keyboard",
     		"https://www.amazon.com/dp/B01CDYB8F6/?coliid=I3G9LP6LLUKNWS&colid=39N3ZBJ0BPD51&psc=0&ref_=lv_ov_lig_dp_it", 
     		PriceFinder.getPrice());
+    
+    NoApplet noapplet = new NoApplet();
     
     
     
@@ -78,6 +76,13 @@ public class Main extends JFrame {
     	
     	item.setCurrentPrice(PriceFinder.getPrice());
     	ComparePrice.getPriceChange(item.getCurrentPrice(), item.getOriginalPrice());
+    	
+    	
+    	if (item.getCurrentPrice() < item.getOriginalPrice())
+    	{
+        	noapplet.play("WW_Textbox_Open.wav");
+    	}
+    	
     	
     	showMessage("Prices Updated!");
     	super.repaint();

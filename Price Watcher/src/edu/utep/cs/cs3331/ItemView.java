@@ -1,6 +1,6 @@
 //Timothy P. McCrary
 
-package pricewatcher.base;
+package edu.utep.cs.cs3331;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,12 +15,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-
-import edu.utep.cs.cs3331.ComparePrice;
-import edu.utep.cs.cs3331.Item;
-import edu.utep.cs.cs3331.PriceFinder;
-import edu.utep.cs.cs3331.VisitUrl;;
+import javax.swing.JPanel;;
 
 /** A special panel to display the detail of an item. */
 
