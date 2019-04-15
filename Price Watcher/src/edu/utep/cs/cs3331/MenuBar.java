@@ -1,6 +1,5 @@
 package edu.utep.cs.cs3331;
 
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -16,86 +15,76 @@ public class MenuBar
 	private Main main;
 	
 	
-	
-	
-	ImageIcon updateIcon = new ImageIcon("src/image/update icon.png");
-	ImageIcon plusIcon = new ImageIcon("src/image/Blue Plus icon.png");
-	ImageIcon removeIcon = new ImageIcon("src/image/remove icon.png");
+	ImageIcon updateIcon;
+	ImageIcon plusIcon;
+	ImageIcon removeIcon;
+	ImageIcon editIcon;
 	
 	public MenuBar(Main main)
 	{
 		this.main = main;
 		
-		Image img = updateIcon.getImage();
-		Image newImg = img.getScaledInstance(16, 16, java.awt.Image.SCALE_SMOOTH);
-		updateIcon = new ImageIcon(newImg);
-		
-		img = plusIcon.getImage();
-		newImg = img.getScaledInstance(16, 16, java.awt.Image.SCALE_SMOOTH);
-		plusIcon = new ImageIcon(newImg);
-		
-		img = removeIcon.getImage();
-		newImg = img.getScaledInstance(16, 16, java.awt.Image.SCALE_SMOOTH);
-		removeIcon = new ImageIcon(newImg);
-		
+		updateIcon = ScaleImage.getUpdateIcon();
+		plusIcon = ScaleImage.getPlusIcon();
+		removeIcon = ScaleImage.getRemoveIcon();
+		editIcon = ScaleImage.getEditIcon();
 	}
 	
-
+	/** Creates menu bar. */
 	public JMenuBar createMenuBar()
 	{
-		
-		
 		JMenuBar menuBar;
 		
 		JMenu menu;
 		JMenu subMenu;
-		JMenuItem menuItem;
+		//JMenuItem menuItem;
 		JMenuItem menuUpdate;
 		JMenuItem menuAdd;
 		JMenuItem menuRemove;
+		JMenuItem menuEdit;
 		
+		// Creates main menu bar.
 		menuBar = new JMenuBar();
 		
+		//Creates Items menu in the menu bar.
 		menu = new JMenu("Items");
 		menu.setMnemonic(KeyEvent.VK_I);
-		//menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
 		menuBar.add(menu);
 		
-		//a group of JMenuItems
-		
+		//Creates update and add to Items menu.
 		menuUpdate = createMenuItemUpdate();
 		menu.add(menuUpdate);
-		
-		
+		updateIcon = null;
 		menuAdd = createMenuItemAdd();
 		menu.add(menuAdd);
-		
-		menuRemove = createMenuItemRemove();
-		menu.add(menuRemove);
-
+		plusIcon = null;
 		
 		menu.addSeparator();
-		subMenu = new JMenu("A submenu");
+		
+		subMenu = new JMenu("Selected");
 		subMenu.setMnemonic(KeyEvent.VK_S);
 
-		menuItem = new JMenuItem("An item in the submenu");
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
-		        KeyEvent.VK_2, ActionEvent.ALT_MASK));
-		subMenu.add(menuItem);
-
-		menuItem = new JMenuItem("Another item");
-		subMenu.add(menuItem);
+		menuRemove = createMenuItemRemove();
+		subMenu.add(menuRemove);
+		removeIcon = null;
+		
+		menuEdit = createMenuItemEdit();
+		subMenu.add(menuEdit);
+		editIcon = null;
+		
 		menu.add(subMenu);
 		
-		return menuBar;
-		
+		return menuBar;	
 	
 	}
 	
+	
+
+
 	private JMenuItem createMenuItemUpdate()
 	{
 		JMenuItem menuUpdate;
-		menuUpdate = new JMenuItem("Update Prices", updateIcon);
+		menuUpdate = new JMenuItem("Update prices", updateIcon);
 		menuUpdate.setMnemonic(KeyEvent.VK_U);
 		menuUpdate.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
 		menuUpdate.addActionListener(new ActionListener() 
@@ -118,7 +107,7 @@ public class MenuBar
 		return menuUpdate;
 	}
 
-
+	
 	
 	private JMenuItem createMenuItemAdd()
 	{
@@ -170,6 +159,34 @@ public class MenuBar
 		
 	}
 	
+	
+	private JMenuItem createMenuItemEdit()
+	{
+		JMenuItem menuEdit;
+		
+		menuEdit = new JMenuItem("Edit item", editIcon);
+		menuEdit.setMnemonic(KeyEvent.VK_E);
+		menuEdit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, ActionEvent.ALT_MASK));
+		menuEdit.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				int selectedItem = main.getItemManager().findSelectedItem();
+				if(selectedItem != -1)
+				{
+					main.getItemDialogs().editItemDialog(selectedItem);
+					return;
+				}
+				else
+				{
+					main.showMessage("No item selected!");
+					return;
+				}
+			}
+		});
+		
+		return menuEdit;
+	}
 	
 	
 	

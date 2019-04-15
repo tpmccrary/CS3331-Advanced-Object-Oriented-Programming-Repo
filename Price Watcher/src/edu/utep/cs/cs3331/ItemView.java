@@ -1,5 +1,3 @@
-//Timothy P. McCrary
-
 package edu.utep.cs.cs3331;
 
 import java.awt.Color;
@@ -16,8 +14,8 @@ import java.text.DecimalFormat;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;;
 
-/** A special panel to display the detail of an item. */
-
+/** A special panel to display the detail of an item. 
+ * @author Timothy P. McCrary*/
 @SuppressWarnings("serial")
 public class ItemView extends JPanel 
 {

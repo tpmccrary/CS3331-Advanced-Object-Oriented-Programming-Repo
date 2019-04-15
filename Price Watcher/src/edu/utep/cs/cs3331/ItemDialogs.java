@@ -26,7 +26,7 @@ public class ItemDialogs
 		this.main = main;
 	}
 	
-	public void addItemDialog()
+	public void addItemDialog() 
 	{
 		JFrame frame = new JFrame();
 		
@@ -43,7 +43,6 @@ public class ItemDialogs
 		dialog.setLayout(new FlowLayout());
 		
 		
-		//addButton.addActionListener(this::addButtonClicked);
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
@@ -99,6 +98,63 @@ public class ItemDialogs
 		
 	}
 	
+	public void editItemDialog(int itemIndex)
+	{
+		JFrame frame = new JFrame();
+		
+		JButton confirmButton = new JButton("Confirm");
+		JButton cancelButton = new JButton("Cancel");
+		
+		JLabel nameLabel = new JLabel("Name:");
+		JLabel urlLabel = new JLabel("URL:");
+		
+		JTextArea nameTextArea = new JTextArea(main.getItemManager().getItems()[itemIndex].getItemName(), 1, 15);
+		JTextArea urlTextArea = new JTextArea(main.getItemManager().getItems()[itemIndex].getUrl(), 1, 15);
+		
+		dialog = new JDialog(frame, "Edit this Item", true);
+		dialog.setLayout(new FlowLayout());
+		
+		
+		confirmButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				itemName = nameTextArea.getText();
+				nameTextArea.setText("");
+				
+				itemUrl = urlTextArea.getText();
+				urlTextArea.setText("");
+				
+				main.getItemManager().getItems()[itemIndex].setItemName(itemName);
+				main.getItemManager().getItems()[itemIndex].setUrl(itemUrl);
+
+				
+				frame.dispose();
+			}
+		});
+		
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				nameTextArea.setText("");
+				urlTextArea.setText("");
+				
+				frame.dispose();
+			}
+		});
+		
+		
+		
+		dialog.add(nameLabel);
+		dialog.add(nameTextArea);
+		dialog.add(urlLabel);
+		dialog.add(urlTextArea);
+		dialog.add(confirmButton);
+		dialog.add(cancelButton);
+		dialog.setSize(250, 300);
+		dialog.setResizable(false);
+		dialog.setVisible(true);
+		
+	}
 	
 	public String getItemName()
 	{
@@ -109,6 +165,8 @@ public class ItemDialogs
 	{
 		return itemUrl;
 	}
+
+	
 	
 	
 	

@@ -1,10 +1,10 @@
-// Timothy P. McCrary
-
 package edu.utep.cs.cs3331;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
 
+/** Stores item details.
+ * @author Timothy P. McCrary*/
 public class Item 
 {
 	private String itemName;
@@ -15,6 +15,10 @@ public class Item
 	
 	private boolean isSelected = false;
 	
+	/** Creates item object given its name, url, and price)
+	 * @param itemName The name the item will be given.
+	 * @param url The URL the item will be given
+	 * @param currentPrice The price the item will be given. */
 	public Item(String itemName, String url, double currentPrice)
 	{
 		this.itemName = itemName;
@@ -24,11 +28,14 @@ public class Item
 		this.dateAdded = generateDateAdded();
 	}
 	
+	/** Creates item object without any item details.*/
 	public Item()
 	{
 		this("NAME", "URL", 0.0);
 	}
 	
+	/** Gets date when the item object was created along with it original price.
+	 * @return The date along with the original price.*/
 	public String generateDateAdded()
 	{
 		DecimalFormat numFormat = new DecimalFormat("#,###,###,##0.00");

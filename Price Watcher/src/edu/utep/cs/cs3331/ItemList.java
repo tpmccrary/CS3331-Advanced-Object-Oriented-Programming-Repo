@@ -25,35 +25,14 @@ public class ItemList extends JPanel
 		
 		
 		listModel = new DefaultListModel<>();
-//		listModel.addElement(item1);
-//		listModel.addElement(item2);
-//		listModel.addElement(item3);
-		
+
 		itemList = new JList<>(listModel);
 		
 		add(new JScrollPane(itemList));
 		itemList.setCellRenderer(new ItemViewRenderer());
-		
-//		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		this.setTitle("Item List");
-//		this.setSize(400, 400);
-//		this.setLocationByPlatform(true);
-//		this.setVisible(true);
-//		
-		
-
+	
 	}
 	
-//	public static void main(String[] args)
-//	{
-//		SwingUtilities.invokeLater(new Runnable() {
-//			@Override
-//			public void run() {
-//				new ItemList();
-//			}
-//		});
-//	}
-//	
 	
 	public void addToList(Item item)
 	{
@@ -73,11 +52,6 @@ public class ItemList extends JPanel
 		JPanel panel = new JPanel(new GridLayout(1,1));
 		panel.add(new JScrollPane(itemList));
 		return panel;
-	}
-	
-	public void repopulateList()
-	{
-		
 	}
 	
 }

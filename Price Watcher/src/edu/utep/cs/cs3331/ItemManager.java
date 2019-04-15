@@ -1,5 +1,6 @@
 package edu.utep.cs.cs3331;
-
+/** Manages item objects
+ * @author Timothy P. McCrary*/
 public class ItemManager
 {
 	private Main main;
@@ -7,12 +8,15 @@ public class ItemManager
 	private Item[] items;
 	private int numItems = 0;
 	
+	/** Creates item manager object, along with an item list.
+	 * @param main The main class in order to have access to other objects.*/
 	public ItemManager(Main main)
 	{
 		
 		this.main = main;
 		items = new Item[10];
 	}
+	
 	
 	public void addItem(Item item)
 	{
