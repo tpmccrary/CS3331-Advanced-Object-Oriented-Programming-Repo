@@ -13,6 +13,8 @@ public class Item
 	private double originalPrice;
 	private String dateAdded;
 	
+	private boolean isSelected = false;
+	
 	public Item(String itemName, String url, double currentPrice)
 	{
 		this.itemName = itemName;
@@ -20,6 +22,11 @@ public class Item
 		this.currentPrice = currentPrice;
 		this.originalPrice = currentPrice;
 		this.dateAdded = generateDateAdded();
+	}
+	
+	public Item()
+	{
+		this("NAME", "URL", 0.0);
 	}
 	
 	public String generateDateAdded()
@@ -35,6 +42,18 @@ public class Item
 		return dateAddedAndPrice;
 	}
 	
+	
+	
+
+	public boolean isSelected()
+	{
+		return isSelected;
+	}
+
+	public void setSelected(boolean isSelected)
+	{
+		this.isSelected = isSelected;
+	}
 
 	public String getItemName() 
 	{
@@ -86,5 +105,10 @@ public class Item
 		this.dateAdded = dateAdded;
 	}
 	
+	@Override
+	public String toString()
+	{
+		return itemName;
+	}
 	
 }

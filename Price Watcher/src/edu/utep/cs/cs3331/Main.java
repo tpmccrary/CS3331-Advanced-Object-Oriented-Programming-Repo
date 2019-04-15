@@ -25,16 +25,25 @@ import javax.swing.SwingUtilities;
 public class Main extends JFrame {
 
     /** Default dimension of the dialog. */
-    private final static Dimension DEFAULT_SIZE = new Dimension(400, 300);
+    private final static Dimension DEFAULT_SIZE = new Dimension(500, 700);
       
     /** Special panel to display the watched item. */
-    private ItemView itemView;
+    //private ItemView itemView;
+    
+    private ItemList itemList;
+    
+    private MenuBar menuBar;
+    
+    private ItemManager itemManager;
+    
+    private ItemDialogs itemDialogs;
       
     /** Message bar to display various messages. */
     private JLabel msgBar = new JLabel(" ");
 
     /** Create a new dialog. */
-    public Main() {
+    public Main() 
+    {
     	this(DEFAULT_SIZE);
     }
     
@@ -42,8 +51,11 @@ public class Main extends JFrame {
     Item item = new Item("Logitech G610 Mechanical Keyboard",
     		"https://www.amazon.com/dp/B01CDYB8F6/?coliid=I3G9LP6LLUKNWS&colid=39N3ZBJ0BPD51&psc=0&ref_=lv_ov_lig_dp_it", 
     		PriceFinder.getPrice());
+    Item item2 = new Item("Logitech G610 Mechanical Keyboard",
+    		"https://www.amazon.com/dp/B01CDYB8F6/?coliid=I3G9LP6LLUKNWS&colid=39N3ZBJ0BPD51&psc=0&ref_=lv_ov_lig_dp_it", 
+    		PriceFinder.getPrice());
     
-    NoApplet noapplet = new NoApplet();
+    //NoApplet noapplet = new NoApplet();
     
     
     
@@ -52,6 +64,14 @@ public class Main extends JFrame {
         super("Price Watcher");
         setSize(dim);
         
+        itemList = new ItemList();
+        itemManager = new ItemManager(this);
+        menuBar = new MenuBar(this);
+        itemDialogs = new ItemDialogs(this);
+        
+        //menuBar.getItemDialogs(itemDialogs);
+        //itemDialogs.setItemManager(itemManager);
+        
         configureUI();
         //setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -59,9 +79,33 @@ public class Main extends JFrame {
         //setResizable(false);
         showMessage("Welcome!"); 
         
-        itemView.getItem(item);
+        //itemManager = new ItemManager();
+        
+        //itemManager.addItem(item);
+ 
+//        itemList.addToList(item);
+//        itemList.addToList(item2);
+        
+//        itemManager.addItem(item, itemList);
+//        itemManager.addItem(item2, itemList);
         
         
+        
+        
+        
+        //itemView.getItem(item);
+        
+        
+        
+    }
+    
+    public void menuAddButtonClicked(ActionEvent event)
+    {
+    	
+    }
+    public void addButtonClicked(ActionEvent event)
+    {
+    	
     }
     
   
@@ -77,20 +121,22 @@ public class Main extends JFrame {
     	ComparePrice.getPriceChange(item.getCurrentPrice(), item.getOriginalPrice());
     	
     	
-    	if (item.getCurrentPrice() < item.getOriginalPrice())
-    	{
-        	noapplet.play("WW_Textbox_Open.wav");
-    	}
+//    	if (item.getCurrentPrice() < item.getOriginalPrice())
+//    	{
+//        	noapplet.play("WW_Textbox_Open.wav");
+//    	}
     	
     	
     	showMessage("Prices Updated!");
     	super.repaint();
     }
     
+    
     /** Callback to be invoked when the view-page icon is clicked.
      * Launch a (default) web browser by supplying the URL of
      * the item. */
-    private void viewPageClicked() {    	
+    public void viewPageClicked() 
+    {    	
     	//--
     	//-- WRITE YOUR CODE HERE!
     	//--
@@ -102,26 +148,52 @@ public class Main extends JFrame {
     
         
     /** Configure UI. */
-    private void configureUI() {
+    private void configureUI() 
+    {
+    	this.setJMenuBar(menuBar.createMenuBar());
+    	//this.setJMenuBar(MenuBar.createMenuBar());
+    	
         setLayout(new BorderLayout());
+        
         JPanel control = makeControlPanel();
         control.setBorder(BorderFactory.createEmptyBorder(10,16,0,16)); 
         add(control, BorderLayout.NORTH);
-        JPanel board = new JPanel();
-        board.setBorder(BorderFactory.createCompoundBorder(
+        
+        JPanel panelList = itemList.createList();
+        panelList.setBorder(BorderFactory.createCompoundBorder(
         		BorderFactory.createEmptyBorder(10,16,0,16),
         		BorderFactory.createLineBorder(Color.GRAY)));
-        board.setLayout(new GridLayout(1,1));
-        itemView = new ItemView();
-        itemView.setClickListener(this::viewPageClicked);
-        board.add(itemView);
-        add(board, BorderLayout.CENTER);
+        add(panelList, BorderLayout.CENTER);
+            
+//        JPanel list = new JPanel();
+//        list = itemList.createList();
+//        list.setBorder(BorderFactory.createCompoundBorder(
+//        		BorderFactory.createEmptyBorder(10,16,0,16),
+//        		BorderFactory.createLineBorder(Color.GRAY)));
+//        add(list, BorderLayout.CENTER);
+        
+//        JPanel board = new JPanel();
+//        board.setBorder(BorderFactory.createCompoundBorder(
+//        		BorderFactory.createEmptyBorder(10,16,0,16),
+//        		BorderFactory.createLineBorder(Color.GRAY)));
+//        board.setLayout(new GridLayout(1,1));
+//        itemView = new ItemView();
+//        
+//        itemView.setClickListener(this::viewPageClicked);
+//        board.add(itemView);
+//        board.add(itemList);
+//       
+//        add(board, BorderLayout.CENTER);
+        
+        
+        
         msgBar.setBorder(BorderFactory.createEmptyBorder(10,16,10,0));
         add(msgBar, BorderLayout.SOUTH);
     }
       
     /** Create a control panel consisting of a refresh button. */
-    private JPanel makeControlPanel() {
+    private JPanel makeControlPanel() 
+    {
     	JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING));
     	JButton refreshButton = new JButton("Refresh");
     	refreshButton.setFocusPainted(false);
@@ -131,7 +203,8 @@ public class Main extends JFrame {
     }
 
     /** Show briefly the given string in the message bar. */
-    private void showMessage(String msg) {
+    public void showMessage(String msg) 
+    {
         msgBar.setText(msg);
         new Thread(() -> {
         	try {
@@ -147,5 +220,48 @@ public class Main extends JFrame {
     public static void main(String[] args) {
         new Main();
     }
+    
+    public MenuBar getMenuBar1()
+    {
+    	return menuBar;
+    }
+
+	public void setMenuBar(MenuBar menuBar)
+	{
+		this.menuBar = menuBar;
+	}
+
+	public ItemManager getItemManager()
+	{
+		return itemManager;
+	}
+
+	public void setItemManager(ItemManager itemManager)
+	{
+		this.itemManager = itemManager;
+	}
+
+	public ItemDialogs getItemDialogs()
+	{
+		return itemDialogs;
+	}
+
+	public void setItemDialogs(ItemDialogs itemDialogs)
+	{
+		this.itemDialogs = itemDialogs;
+	}
+
+	public ItemList getItemList()
+	{
+		return itemList;
+	}
+
+	public void setItemList(ItemList itemList)
+	{
+		this.itemList = itemList;
+	}
+    
+	
+    
 
 }
