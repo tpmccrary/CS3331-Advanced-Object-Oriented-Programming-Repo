@@ -1,9 +1,11 @@
 package edu.utep.cs.cs3331;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -38,6 +40,9 @@ public class ItemDialogs
 		
 		JTextArea nameTextArea = new JTextArea("", 1, 15);
 		JTextArea urlTextArea = new JTextArea("", 1, 15);
+		
+		nameTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
+		urlTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
 		
 		dialog = new JDialog(frame, "Add an Item", true);
 		dialog.setLayout(new FlowLayout());
@@ -110,6 +115,9 @@ public class ItemDialogs
 		
 		JTextArea nameTextArea = new JTextArea(main.getItemManager().getItems()[itemIndex].getItemName(), 1, 15);
 		JTextArea urlTextArea = new JTextArea(main.getItemManager().getItems()[itemIndex].getUrl(), 1, 15);
+		
+		nameTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
+		urlTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
 		
 		dialog = new JDialog(frame, "Edit this Item", true);
 		dialog.setLayout(new FlowLayout());
