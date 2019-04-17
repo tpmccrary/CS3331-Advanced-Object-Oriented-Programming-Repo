@@ -6,8 +6,9 @@ import javax.swing.ImageIcon;
 
 public class ScaleImage
 {
+	private static ImageIcon webLinkIcon = scaleImage(new ImageIcon("src/image/web link.png"));
 	private static ImageIcon updateIcon = scaleImage(new ImageIcon("src/image/update icon.png"));
-	private static ImageIcon plusIcon = scaleImage(new ImageIcon("src/image/Blue Plus icon.png"));
+	private static ImageIcon plusIcon = scaleImage(new ImageIcon("src/image/plus icon.png"));
 	private static ImageIcon removeIcon = scaleImage(new ImageIcon("src/image/remove icon.png"));
 	private static ImageIcon editIcon = scaleImage(new ImageIcon("src/image/edit icon.png"));
 	
@@ -21,6 +22,14 @@ public class ScaleImage
 	}
 	
 	
+	public static ImageIcon getWebLinkIcon()
+	{
+		return webLinkIcon;
+	}
+	public static void setWebLinkIcon(ImageIcon webLinkIcon)
+	{
+		ScaleImage.webLinkIcon = webLinkIcon;
+	}
 	public static ImageIcon getUpdateIcon()
 	{
 		return updateIcon;

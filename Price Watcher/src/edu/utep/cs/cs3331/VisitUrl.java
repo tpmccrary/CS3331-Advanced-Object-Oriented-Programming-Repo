@@ -7,9 +7,10 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.InputMismatchException;
 
-public class VisitUrl
+@SuppressWarnings("serial")
+public class VisitUrl extends Main
 {
-	public static void goToUrl(Item item)
+	public static boolean goToUrl(Item item)
 	{
 		try
 		{
@@ -17,12 +18,12 @@ public class VisitUrl
 		} 
 		catch (IOException | URISyntaxException | InputMismatchException e)
 		{
-			//e.printStackTrace();
-//			ui.notValidUrlMessage();
-//			item.setUrl(ui.promptUserForUrl());
-			System.out.println("Not a valid URL.");
+			//System.out.println("Not a valid URL.");
+			return false;
 			
 		}
+		
+		return true;
 	}
 	
 	

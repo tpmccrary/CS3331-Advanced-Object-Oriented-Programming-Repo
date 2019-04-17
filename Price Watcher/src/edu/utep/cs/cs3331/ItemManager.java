@@ -1,6 +1,8 @@
 package edu.utep.cs.cs3331;
 /** Manages item objects
- * @author Timothy P. McCrary*/
+ * 
+ * @author Timothy P. McCrary
+ * */
 public class ItemManager
 {
 	private Main main;
@@ -87,6 +89,21 @@ public class ItemManager
 		for(int i = 0; i < numItems; i++)
 		{
 			items[i].setCurrentPrice(PriceFinder.getPrice());
+		}
+		main.repaint();
+	}
+	
+	
+	public void updateSingleItemPrice()
+	{
+		for(int i = 0; i < numItems; i++)
+		{
+			if(items[i].isSelected() == true)
+			{
+				items[i].setCurrentPrice(PriceFinder.getPrice());
+				main.repaint();
+				return;
+			}
 		}
 	}
 	

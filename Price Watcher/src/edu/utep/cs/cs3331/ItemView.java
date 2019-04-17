@@ -15,7 +15,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;;
 
 /** A special panel to display the detail of an item. 
- * @author Timothy P. McCrary*/
+ * 
+ * @author Timothy P. McCrary
+ * */
 @SuppressWarnings("serial")
 public class ItemView extends JPanel 
 {

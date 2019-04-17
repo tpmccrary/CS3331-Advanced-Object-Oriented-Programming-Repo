@@ -8,6 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
 /**
@@ -34,6 +35,10 @@ public class Main extends JFrame {
     
     private ItemDialogs itemDialogs;
     
+    private PopUpMenu popupMenu;
+    
+    public JPopupMenu listPopupMenu;
+    
     
       
     /** Message bar to display various messages. */
@@ -53,11 +58,16 @@ public class Main extends JFrame {
         super("Price Watcher");
         setSize(dim);
         
-        itemList = new ItemList();
+        itemList = new ItemList(this);
         itemManager = new ItemManager(this);
         menuBar = new MenuBar(this);
         toolBar = new ToolBar(this);
         itemDialogs = new ItemDialogs(this);
+        popupMenu = new PopUpMenu(this);
+        
+        listPopupMenu = popupMenu.createPopupMenu();
+        
+        
         
         //menuBar.getItemDialogs(itemDialogs);
         //itemDialogs.setItemManager(itemManager);
@@ -95,7 +105,6 @@ public class Main extends JFrame {
         
         add(toolBar.createToolBar(), BorderLayout.NORTH);
         
-        
         JPanel panelList = itemList.createList();
         panelList.setBorder(BorderFactory.createCompoundBorder(
         		BorderFactory.createEmptyBorder(10,16,0,16),
@@ -107,16 +116,6 @@ public class Main extends JFrame {
         add(msgBar, BorderLayout.SOUTH);
     }
       
-    /** Create a control panel consisting of a refresh button. */
-//    private JPanel makeControlPanel() 
-//    {
-//    	JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING));
-//    	JButton refreshButton = new JButton("Refresh");
-//    	refreshButton.setFocusPainted(false);
-//        refreshButton.addActionListener(this::refreshButtonClicked);
-//        panel.add(refreshButton);
-//        return panel;
-//    }
 
     /** Show briefly the given string in the message bar. */
     public void showMessage(String msg) 
@@ -131,30 +130,32 @@ public class Main extends JFrame {
         		SwingUtilities.invokeLater(() -> msgBar.setText(" "));
         	}
         }).start();
+        
     }
     
     public static void main(String[] args) {
         new Main();
     }
     
-    public MenuBar getMenuBar1()
+    
+    public JPopupMenu getJPopupMenu()
+    {
+    	return listPopupMenu;
+    }
+    
+    public PopUpMenu getPopupMenu()
+	{
+		return popupMenu;
+	}
+    
+	public MenuBar getMyMenuBar()
     {
     	return menuBar;
     }
-
-	public void setMenuBar(MenuBar menuBar)
-	{
-		this.menuBar = menuBar;
-	}
-
+	
 	public ItemManager getItemManager()
 	{
 		return itemManager;
-	}
-
-	public void setItemManager(ItemManager itemManager)
-	{
-		this.itemManager = itemManager;
 	}
 
 	public ItemDialogs getItemDialogs()
@@ -162,20 +163,13 @@ public class Main extends JFrame {
 		return itemDialogs;
 	}
 
-	public void setItemDialogs(ItemDialogs itemDialogs)
-	{
-		this.itemDialogs = itemDialogs;
-	}
-
 	public ItemList getItemList()
 	{
 		return itemList;
 	}
 
-	public void setItemList(ItemList itemList)
-	{
-		this.itemList = itemList;
-	}
+	
+	
     
 	
     

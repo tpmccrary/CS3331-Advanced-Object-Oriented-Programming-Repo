@@ -13,21 +13,33 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
+/** Class that creates all dialogs for application.
+ * 
+ * @author Timothy P. McCrary
+ * */
 public class ItemDialogs
 {
+	/** The access point to the main class.*/
 	private Main main;
 	
+	/** The dialog itself.*/
 	private JDialog dialog;
 	
+	/** The name that can be typed or edited for an item.*/
 	private String itemName;
+	/** The URL that can be typed or edited for an item.*/
 	private String itemUrl;
 	
-	
+	/** Creates dialog object.
+	 * 
+	 * @param main The main class of the program.
+	 * */
 	public ItemDialogs(Main main)
 	{
 		this.main = main;
 	}
 	
+	/** Creates dialog to add an item in the application.*/
 	public void addItemDialog() 
 	{
 		JFrame frame = new JFrame();
@@ -39,7 +51,7 @@ public class ItemDialogs
 		JLabel urlLabel = new JLabel("URL:");
 		
 		JTextArea nameTextArea = new JTextArea("", 1, 15);
-		JTextArea urlTextArea = new JTextArea("", 1, 15);
+		JTextArea urlTextArea = new JTextArea("https://", 1, 15);
 		
 		nameTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
 		urlTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
@@ -74,7 +86,6 @@ public class ItemDialogs
 		});
 		
 		
-		
 		dialog.add(nameLabel);
 		dialog.add(nameTextArea);
 		dialog.add(urlLabel);
@@ -83,26 +94,32 @@ public class ItemDialogs
 		dialog.add(cancelButton);
 		dialog.setSize(250, 300);
 		dialog.setResizable(false);
+		dialog.setLocationRelativeTo(main.getContentPane());
 		dialog.setVisible(true);
 		
 		
 	}
 	
+	/** Creates dialog to remove item in the application.*/
 	public void removeItemDialog(int itemIndex)
 	{
 		
 		int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove this item?","Remove item", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		
+		
 		
 		if(response == JOptionPane.YES_OPTION)
 		{
 			main.getItemManager().removeItem(itemIndex);
 			return;
 		}
+		
 		return;
 		
 		
 	}
 	
+	/** Creates dialog to edit an existing item in the application.*/
 	public void editItemDialog(int itemIndex)
 	{
 		JFrame frame = new JFrame();
@@ -134,7 +151,8 @@ public class ItemDialogs
 				
 				main.getItemManager().getItems()[itemIndex].setItemName(itemName);
 				main.getItemManager().getItems()[itemIndex].setUrl(itemUrl);
-
+				
+				main.repaint();
 				
 				frame.dispose();
 			}
@@ -160,6 +178,7 @@ public class ItemDialogs
 		dialog.add(cancelButton);
 		dialog.setSize(250, 300);
 		dialog.setResizable(false);
+		dialog.setLocationRelativeTo(main.getContentPane());
 		dialog.setVisible(true);
 		
 	}

@@ -4,30 +4,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+/**
+* Class that creates menu bar for application.
+*
+* @author Timothy P. McCrary
+*/
 public class MenuBar
 {
 	private Main main;
 	
 	
-	ImageIcon updateIcon;
-	ImageIcon plusIcon;
-	ImageIcon removeIcon;
-	ImageIcon editIcon;
-	
 	public MenuBar(Main main)
 	{
 		this.main = main;
-		
-		updateIcon = ScaleImage.getUpdateIcon();
-		plusIcon = ScaleImage.getPlusIcon();
-		removeIcon = ScaleImage.getRemoveIcon();
-		editIcon = ScaleImage.getEditIcon();
 	}
 	
 	/** Creates menu bar. */
@@ -42,6 +36,7 @@ public class MenuBar
 		JMenuItem menuAdd;
 		JMenuItem menuRemove;
 		JMenuItem menuEdit;
+		JMenuItem menuWebLink;
 		
 		// Creates main menu bar.
 		menuBar = new JMenuBar();
@@ -54,10 +49,10 @@ public class MenuBar
 		//Creates update and add to Items menu.
 		menuUpdate = createMenuItemUpdate();
 		menu.add(menuUpdate);
-		updateIcon = null;
+		
 		menuAdd = createMenuItemAdd();
 		menu.add(menuAdd);
-		plusIcon = null;
+		
 		
 		menu.addSeparator();
 		
@@ -66,11 +61,12 @@ public class MenuBar
 
 		menuRemove = createMenuItemRemove();
 		subMenu.add(menuRemove);
-		removeIcon = null;
 		
 		menuEdit = createMenuItemEdit();
 		subMenu.add(menuEdit);
-		editIcon = null;
+		
+		menuWebLink = createMenuItemWebLink();
+		subMenu.add(menuWebLink);
 		
 		menu.add(subMenu);
 		
@@ -78,13 +74,46 @@ public class MenuBar
 	
 	}
 	
-	
+	public JMenuItem createMenuItemWebLink()
+	{
+		JMenuItem menuWebLink;
+		menuWebLink = new JMenuItem("Visit website", ScaleImage.getWebLinkIcon());
+		menuWebLink.setMnemonic(KeyEvent.VK_V);
+		menuWebLink.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_5, ActionEvent.ALT_MASK));
+		menuWebLink.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				
+				
+				int selectedItem = main.getItemManager().findSelectedItem();
+				if(selectedItem != -1)
+				{
+					if(VisitUrl.goToUrl(main.getItemManager().getItems()[selectedItem]) == true)
+					{
+						return;
+					}
+					else
+					{
+						main.showMessage("Not a valid URL (i.e \"https://www.bing.com/\").");
+					}
+				}
+				else
+				{
+					main.showMessage("No item selected!");
+					return;
+				}
+			}
+		});
+		
+		return menuWebLink;
+	}
 
 
-	private JMenuItem createMenuItemUpdate()
+	public JMenuItem createMenuItemUpdate()
 	{
 		JMenuItem menuUpdate;
-		menuUpdate = new JMenuItem("Update prices", updateIcon);
+		menuUpdate = new JMenuItem("Update prices", ScaleImage.getUpdateIcon());
 		menuUpdate.setMnemonic(KeyEvent.VK_U);
 		menuUpdate.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
 		menuUpdate.addActionListener(new ActionListener() 
@@ -92,7 +121,7 @@ public class MenuBar
 			public void actionPerformed(ActionEvent e)
 			{
 				
-				main.getItemManager().updateItemPrices();
+				
 				if(main.getItemManager().getNumItems() == 0)
 				{
 					main.showMessage("There are no items to update!");
@@ -100,6 +129,7 @@ public class MenuBar
 				else
 				{
 					main.showMessage("Prices updated!");
+					main.getItemManager().updateItemPrices();
 				}
 			}
 		});
@@ -109,11 +139,11 @@ public class MenuBar
 
 	
 	
-	private JMenuItem createMenuItemAdd()
+	public JMenuItem createMenuItemAdd()
 	{
 		JMenuItem menuAdd;
 		
-		menuAdd = new JMenuItem("Add item", plusIcon);
+		menuAdd = new JMenuItem("Add item", ScaleImage.getPlusIcon());
 		menuAdd.setMnemonic(KeyEvent.VK_A);
 		menuAdd.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
 		menuAdd.addActionListener(new ActionListener() 
@@ -129,11 +159,11 @@ public class MenuBar
 		
 	}
 	
-	private JMenuItem createMenuItemRemove()
+	public JMenuItem createMenuItemRemove()
 	{
 		JMenuItem menuRemove;
 		
-		menuRemove = new JMenuItem("Remove item", removeIcon);
+		menuRemove = new JMenuItem("Remove item", ScaleImage.getRemoveIcon());
 		menuRemove.setMnemonic(KeyEvent.VK_R);
 		menuRemove.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
 		menuRemove.addActionListener(new ActionListener() 
@@ -160,11 +190,11 @@ public class MenuBar
 	}
 	
 	
-	private JMenuItem createMenuItemEdit()
+	public JMenuItem createMenuItemEdit()
 	{
 		JMenuItem menuEdit;
 		
-		menuEdit = new JMenuItem("Edit item", editIcon);
+		menuEdit = new JMenuItem("Edit item", ScaleImage.getEditIcon());
 		menuEdit.setMnemonic(KeyEvent.VK_E);
 		menuEdit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, ActionEvent.ALT_MASK));
 		menuEdit.addActionListener(new ActionListener() 
@@ -186,6 +216,33 @@ public class MenuBar
 		});
 		
 		return menuEdit;
+	}
+	
+	public JMenuItem createMenuItemSingleUpdate()
+	{
+		JMenuItem menuUpdate;
+		menuUpdate = new JMenuItem("Update price", ScaleImage.getUpdateIcon());
+		menuUpdate.setMnemonic(KeyEvent.VK_U);
+		menuUpdate.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+		menuUpdate.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				
+				
+				if(main.getItemManager().getNumItems() == 0)
+				{
+					main.showMessage("There are no item selected to update!");
+				}
+				else
+				{
+					main.showMessage("Prices updated!");
+					main.getItemManager().updateSingleItemPrice();
+				}
+			}
+		});
+		
+		return menuUpdate;
 	}
 	
 	

@@ -5,7 +5,11 @@ import java.awt.Component;
 
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-
+/**
+* Custom renderer in order to have images and text in item list.
+*
+* @author Timothy P. McCrary
+*/
 @SuppressWarnings("serial")
 public class ItemViewRenderer extends ItemView implements ListCellRenderer<Item>
 {	
