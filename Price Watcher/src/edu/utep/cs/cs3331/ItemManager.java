@@ -5,13 +5,17 @@ package edu.utep.cs.cs3331;
  * */
 public class ItemManager
 {
+	/** The access point to the main class.*/
 	private Main main;
 	
+	/** The array that hold and keep track of items the user wants to track.*/
 	private Item[] items;
+	/** The number of items on the list.*/
 	private int numItems = 0;
 	
-	/** Creates item manager object, along with an item list.
-	 * @param main The main class in order to have access to other objects.*/
+	/** Constructor for object, creates item list array.
+	 * @param main The main class in order to have access to other objects.
+	 * */
 	public ItemManager(Main main)
 	{
 		
@@ -19,7 +23,9 @@ public class ItemManager
 		items = new Item[10];
 	}
 	
-	
+	/** Adds an item to the Item array and to the JList.
+	 * @param item The item that will be added.
+	 * */
 	public void addItem(Item item)
 	{
 		for(int i = 0; i < items.length; i++)
@@ -49,6 +55,9 @@ public class ItemManager
 		return;
 	}
 	
+	/** Removes an item from the Item array and JList.
+	 * @param itemIndex The index of where the item is stored in the array.
+	 * */
 	public void removeItem(int itemIndex)
 	{
 		Item[] tempItems = new Item[items.length];
@@ -71,6 +80,9 @@ public class ItemManager
 		tempItems = null;
 	}
 	
+	/** Returns the index of the item that is selected through the JList by the user.
+	 * @return The items index.
+	 * */
 	public int findSelectedItem()
 	{
 		for(int i = 0; i < numItems; i++)
@@ -83,7 +95,7 @@ public class ItemManager
 		return -1;
 	}
 	
-	
+	/** Updates the prices of all the items being tracked.*/
 	public void updateItemPrices()
 	{
 		for(int i = 0; i < numItems; i++)
@@ -93,7 +105,7 @@ public class ItemManager
 		main.repaint();
 	}
 	
-	
+	/** Updates the price of a single item selected by the user.*/
 	public void updateSingleItemPrice()
 	{
 		for(int i = 0; i < numItems; i++)

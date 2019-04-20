@@ -119,7 +119,10 @@ public class ItemView extends JPanel
     	return new Rectangle(20, 0, 20, 20).contains(x,  y);
     }
     
-    // Getter for the Item object 
+    /** Gets the item the ItemView will be painting.
+     * 
+     * @param item The item that will be painted.
+     * */
     public void getItem(Item item)
     {
     	this.item = item;

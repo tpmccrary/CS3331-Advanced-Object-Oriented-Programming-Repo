@@ -16,9 +16,12 @@ import javax.swing.KeyStroke;
 */
 public class MenuBar
 {
+	/** Access point to the main class.*/
 	private Main main;
 	
-	
+	/** Constructor for object.
+	 * 
+	 * @param main The main class of the program.*/
 	public MenuBar(Main main)
 	{
 		this.main = main;
@@ -74,6 +77,10 @@ public class MenuBar
 	
 	}
 	
+	/** Returns web link menu item.
+	 *  
+	 *  @return web link menu item.
+	 *  */
 	public JMenuItem createMenuItemWebLink()
 	{
 		JMenuItem menuWebLink;
@@ -109,7 +116,9 @@ public class MenuBar
 		return menuWebLink;
 	}
 
-
+	/** Returns update button menu item.
+	 * 
+	 * @return update menu item.*/
 	public JMenuItem createMenuItemUpdate()
 	{
 		JMenuItem menuUpdate;
@@ -138,7 +147,9 @@ public class MenuBar
 	}
 
 	
-	
+	/** Returns add button menu item.
+	 * 
+	 * @return add menu item.*/
 	public JMenuItem createMenuItemAdd()
 	{
 		JMenuItem menuAdd;
@@ -159,6 +170,10 @@ public class MenuBar
 		
 	}
 	
+	/** Returns remove button menu item.
+	 * 
+	 * @return remove menu item.
+	 * */
 	public JMenuItem createMenuItemRemove()
 	{
 		JMenuItem menuRemove;
@@ -189,7 +204,10 @@ public class MenuBar
 		
 	}
 	
-	
+	/** Returns edit item button menu item.
+	 * 
+	 * @return edit item menu item.
+	 * */
 	public JMenuItem createMenuItemEdit()
 	{
 		JMenuItem menuEdit;
@@ -218,6 +236,10 @@ public class MenuBar
 		return menuEdit;
 	}
 	
+	/** Returns update single item price menu item.
+	 * 
+	 * @return Update single item menu item.
+	 * */
 	public JMenuItem createMenuItemSingleUpdate()
 	{
 		JMenuItem menuUpdate;

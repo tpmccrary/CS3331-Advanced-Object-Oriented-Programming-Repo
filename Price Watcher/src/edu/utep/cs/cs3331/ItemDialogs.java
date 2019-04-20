@@ -100,7 +100,10 @@ public class ItemDialogs
 		
 	}
 	
-	/** Creates dialog to remove item in the application.*/
+	/** Creates dialog to remove item in the application.
+	 * 
+	 * @param itemIndex The index of the item which will be removed.
+	 * */
 	public void removeItemDialog(int itemIndex)
 	{
 		
@@ -119,7 +122,10 @@ public class ItemDialogs
 		
 	}
 	
-	/** Creates dialog to edit an existing item in the application.*/
+	/** Creates dialog to edit an existing item in the application.
+	 * 
+	 * @param itemIndex The index of the item that will be edited.
+	 * */
 	public void editItemDialog(int itemIndex)
 	{
 		JFrame frame = new JFrame();

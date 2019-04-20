@@ -21,22 +21,21 @@ public class Main extends JFrame {
 
     /** Default dimension of the dialog. */
     private final static Dimension DEFAULT_SIZE = new Dimension(500, 700);
-      
-    /** Special panel to display the watched item. */
-    //private ItemView itemView;
     
+    /** Reference to ItemList.*/
     private ItemList itemList;
-    
+    /** Reference to MenuBar.*/
     private MenuBar menuBar;
-    
+    /** Reference to ToolBar.*/
     private ToolBar toolBar;
-    
+    /** Reference to ItemManager.*/
     private ItemManager itemManager;
-    
+    /** Reference to ItemDialogs.*/
     private ItemDialogs itemDialogs;
-    
+    /** Reference to PopupMenu.*/
     private PopUpMenu popupMenu;
     
+    /** Reference to JPopupMenu.*/
     public JPopupMenu listPopupMenu;
     
     
@@ -67,11 +66,6 @@ public class Main extends JFrame {
         
         listPopupMenu = popupMenu.createPopupMenu();
         
-        
-        
-        //menuBar.getItemDialogs(itemDialogs);
-        //itemDialogs.setItemManager(itemManager);
-        
         configureUI();
         //setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -96,7 +90,7 @@ public class Main extends JFrame {
     }
     
         
-    /** Configure UI. */
+    /** Configures UI. */
     private void configureUI() 
     {
     	this.setJMenuBar(menuBar.createMenuBar());

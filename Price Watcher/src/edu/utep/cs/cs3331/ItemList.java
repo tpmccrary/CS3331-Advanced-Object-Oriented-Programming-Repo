@@ -25,7 +25,7 @@ public class ItemList extends JPanel
 	/** The access point to the main class.*/
 	Main main;
 	
-	/** Creates list object
+	/** Creates list object.
 	 * 
 	 * @param main The main class of the program.
 	 * */

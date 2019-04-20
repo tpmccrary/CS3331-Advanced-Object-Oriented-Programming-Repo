@@ -8,15 +8,29 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JToolBar;
 
+/**
+* Class that creates tool bar for application.
+*
+* @author Timothy P. McCrary
+*/
 public class ToolBar
 {
+	/** Access point the main class.*/
 	private Main main;
 	
+	/** Constructor for object.
+	 * 
+	 * @param main Main class of program.
+	 * */
 	public ToolBar(Main main)
 	{
 		this.main = main;
 	}
 	
+	/** Returns constructed tool bar.
+	 * 
+	 * @return A tool bar.
+	 * */
 	public JToolBar createToolBar()
 	{
 		JToolBar toolBar = new JToolBar();
@@ -38,6 +52,10 @@ public class ToolBar
 		return toolBar;
 	}
 	
+	/** Returns a button to visit web store.
+	 * 
+	 * @return Visit URL button.
+	 * */
 	private JButton createVisitUrlButton()
 	{
 		JButton visitUrlButton = new JButton();
@@ -73,6 +91,10 @@ public class ToolBar
 		return visitUrlButton;
 	}
 	
+	/** Returns button to add an item.
+	 * 
+	 * @return Add item button.
+	 * */
 	private JButton createAddButton()
 	{
 		JButton addButton = new JButton();
@@ -92,6 +114,10 @@ public class ToolBar
 		return addButton;
 	}
 	
+	/** Returns button to update item prices.
+	 * 
+	 * @return Update item prices button.
+	 * */
 	private JButton createUpdateButton()
 	{
 		JButton updateButton = new JButton();
@@ -120,6 +146,10 @@ public class ToolBar
 		return updateButton;
 	}
 	
+	/** Returns button to remove an item.
+	 * 
+	 * @return Remove item button.
+	 * */
 	private JButton createRemoveButton()
 	{
 		JButton removeButton = new JButton();
@@ -149,6 +179,10 @@ public class ToolBar
 		return removeButton;
 	}
 	
+	/** Returns button to edit an item.
+	 * 
+	 * @return Edit item button.
+	 * */
 	private JButton createEditButton()
 	{
 		JButton editButton = new JButton();
