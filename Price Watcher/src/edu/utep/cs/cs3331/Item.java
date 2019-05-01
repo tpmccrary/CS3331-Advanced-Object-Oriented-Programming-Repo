@@ -1,18 +1,33 @@
-// Timothy P. McCrary
-
 package edu.utep.cs.cs3331;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
 
+/** Class that stores item details.
+ * 
+ * @author Timothy P. McCrary
+ * */
 public class Item 
 {
+	/** The name of this item.*/
 	private String itemName;
+	/** The URL of this item.*/
 	private String url;
+	/** The current price of this item.*/
 	private double currentPrice;
+	/** The original price of this item.*/
 	private double originalPrice;
+	/** The date the item was added.*/
 	private String dateAdded;
 	
+	/** The status of the selection of this item.*/
+	private boolean isSelected = false;
+	
+	/** Creates item object given its name, URL, and price.)
+	 * @param itemName The name the item will be given.
+	 * @param url The URL the item will be given
+	 * @param currentPrice The price the item will be given. 
+	 * */
 	public Item(String itemName, String url, double currentPrice)
 	{
 		this.itemName = itemName;
@@ -22,6 +37,16 @@ public class Item
 		this.dateAdded = generateDateAdded();
 	}
 	
+	/** Creates item object without any item details.
+	 * */
+	public Item()
+	{
+		this("NAME", "URL", 0.0);
+	}
+	
+	/** Returns date when the item object was created along with it original price.
+	 * @return The date along with the original price.
+	 * */
 	public String generateDateAdded()
 	{
 		DecimalFormat numFormat = new DecimalFormat("#,###,###,##0.00");
@@ -35,6 +60,16 @@ public class Item
 		return dateAddedAndPrice;
 	}
 	
+	
+	public boolean isSelected()
+	{
+		return isSelected;
+	}
+
+	public void setSelected(boolean isSelected)
+	{
+		this.isSelected = isSelected;
+	}
 
 	public String getItemName() 
 	{
@@ -86,5 +121,10 @@ public class Item
 		this.dateAdded = dateAdded;
 	}
 	
+	@Override
+	public String toString()
+	{
+		return itemName;
+	}
 	
 }

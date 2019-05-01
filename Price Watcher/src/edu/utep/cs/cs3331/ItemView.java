@@ -1,5 +1,3 @@
-//Timothy P. McCrary
-
 package edu.utep.cs.cs3331;
 
 import java.awt.Color;
@@ -16,13 +14,17 @@ import java.text.DecimalFormat;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;;
 
-/** A special panel to display the detail of an item. */
-
+/** A special panel to display the detail of an item. 
+ * 
+ * @author Timothy P. McCrary
+ * */
 @SuppressWarnings("serial")
-public class ItemView extends JPanel {
+public class ItemView extends JPanel 
+{
     
 	/** Interface to notify a click on the view page icon. */
-	public interface ClickListener {
+	public interface ClickListener 
+	{
 		
 		/** Callback to be invoked when the view page icon is clicked. */
 		void clicked();
@@ -35,12 +37,16 @@ public class ItemView extends JPanel {
     private ClickListener listener;
     
     /** Create a new instance. */
-    public ItemView() {
-    	setPreferredSize(new Dimension(100, 160));
+    public ItemView() 
+    {
+    	setPreferredSize(new Dimension(450, 160));
         setBackground(Color.WHITE);
-        addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-            	if (isViewPageClicked(e.getX(), e.getY()) && listener != null) {
+        addMouseListener(new MouseAdapter() 
+        {
+            public void mouseClicked(MouseEvent e) 
+            {
+            	if (isViewPageClicked(e.getX(), e.getY()) && listener != null) 
+            	{
             		listener.clicked();
             	}
             }
@@ -48,7 +54,8 @@ public class ItemView extends JPanel {
     }
         
     /** Set the view-page click listener. */
-    public void setClickListener(ClickListener listener) {
+    public void setClickListener(ClickListener listener) 
+    {
     	this.listener = listener;
     }
     
@@ -70,10 +77,10 @@ public class ItemView extends JPanel {
         
         
         
-        int x = 20, y = 30;
+        int x = 20, y = 20;
         // g.drawImage(getImage("view.png"), x, y)
-        Image image = getImage("keyboard.jpg");
-        g.drawImage(image, x, y - 30, 128, 64, this);
+        Image image = getImage("web link.png");
+        g.drawImage(image, x, y , 20, 20, this);
         //g.setFont(getFont().deriveFont(Font.BOLD));
         //g.drawString("[View]", x, y);
         y += 45;
@@ -103,15 +110,19 @@ public class ItemView extends JPanel {
     }
     
     /** Return true if the given screen coordinate is inside the viewPage icon. */
-    private boolean isViewPageClicked(int x, int y) {
+    private boolean isViewPageClicked(int x, int y) 
+    {
     	//--
     	//-- WRITE YOUR CODE HERE
     	//--
     	
-    	return new Rectangle(20, 0, 128, 64).contains(x,  y);
+    	return new Rectangle(20, 0, 20, 20).contains(x,  y);
     }
     
-    // Getter for the Item object 
+    /** Gets the item the ItemView will be painting.
+     * 
+     * @param item The item that will be painted.
+     * */
     public void getItem(Item item)
     {
     	this.item = item;

@@ -1,4 +1,4 @@
-package edu.utep.cs.cs3331;
+package noapplet;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
