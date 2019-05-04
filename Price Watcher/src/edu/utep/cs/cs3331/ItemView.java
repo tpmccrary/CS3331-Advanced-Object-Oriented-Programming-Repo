@@ -79,11 +79,11 @@ public class ItemView extends JPanel
         
         int x = 20, y = 20;
         // g.drawImage(getImage("view.png"), x, y)
-        Image image = getImage("web link.png");
-        g.drawImage(image, x, y , 20, 20, this);
+        //Image image = getImage("web link.png");
+        //g.drawImage(image, x, y , 20, 20, this);
         //g.setFont(getFont().deriveFont(Font.BOLD));
         //g.drawString("[View]", x, y);
-        y += 45;
+        //y += 45;
         g.drawString("Name: " + item.getItemName(), x, y);
         y += 20;
         g.drawString("URL: " + item.getUrl(), x, y);

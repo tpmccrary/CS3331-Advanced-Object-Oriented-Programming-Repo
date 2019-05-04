@@ -7,7 +7,7 @@ package edu.utep.cs.cs3331;
 */
 public class PriceFinder
 {
-	/** Returns price of an item.
+	/** Returns random price for an item.
 	 * 
 	 * @return Item price.*/
 	public static double getPrice()

@@ -100,7 +100,7 @@ public class ItemManager
 	{
 		for(int i = 0; i < numItems; i++)
 		{
-			items[i].setCurrentPrice(PriceFinder.getPrice());
+			items[i].setCurrentPrice(WebPriceFinder.findPrice(items[i].getUrl()));
 		}
 		main.repaint();
 	}
@@ -112,7 +112,7 @@ public class ItemManager
 		{
 			if(items[i].isSelected() == true)
 			{
-				items[i].setCurrentPrice(PriceFinder.getPrice());
+				items[i].setCurrentPrice(WebPriceFinder.findPrice(items[i].getUrl()));
 				main.repaint();
 				return;
 			}

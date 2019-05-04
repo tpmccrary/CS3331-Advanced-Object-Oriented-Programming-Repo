@@ -21,6 +21,8 @@ public class ScaleImage
 	private static ImageIcon removeIcon = scaleImage(new ImageIcon("src/image/remove icon.png"));
 	/** Edit icon.*/
 	private static ImageIcon editIcon = scaleImage(new ImageIcon("src/image/edit icon.png"));
+	/** Amazon icon.*/
+	private static ImageIcon amazonIcon = scaleImage(new ImageIcon("src/image/amazon icon.png"));
 	
 	/** Scales image down to right size.
 	 * 
@@ -75,6 +77,15 @@ public class ScaleImage
 	{
 		ScaleImage.editIcon = editIcon;
 	}
+	public static ImageIcon getAmazonIcon()
+	{
+		return amazonIcon;
+	}
+	public static void setAmazonIcon(ImageIcon amazonIcon)
+	{
+		ScaleImage.amazonIcon = amazonIcon;
+	}
+	
 	
 	
 }
