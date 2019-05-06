@@ -1,4 +1,5 @@
 package edu.utep.cs.cs3331;
+
 /** Manages item objects
  * 
  * @author Timothy P. McCrary
@@ -21,6 +22,7 @@ public class ItemManager
 		
 		this.main = main;
 		items = new Item[10];
+		
 	}
 	
 	/** Adds an item to the Item array and to the JList.

@@ -3,12 +3,16 @@ package edu.utep.cs.cs3331;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
+
+import edu.utep.cs.cs3331.jsontools.JsonManager;
+import org.json.simple.*;
 /**
 * Class that creates list to display the items.
 *
@@ -25,13 +29,18 @@ public class ItemList extends JPanel
 	/** The access point to the main class.*/
 	Main main;
 	
+	JsonManager jsonManager;
+	
 	/** Creates list object.
 	 * 
 	 * @param main The main class of the program.
+	 * @throws IOException 
 	 * */
-	public ItemList(Main main)
+	public ItemList(Main main) throws IOException
 	{
 		this.main = main;
+		
+		jsonManager = new JsonManager();
 		
 		listModel = new DefaultListModel<>();
 
@@ -59,6 +68,8 @@ public class ItemList extends JPanel
 	{
 
 		listModel.addElement(item);
+		jsonManager.writeIntoFile(item);
+		
 		
 	}
 	

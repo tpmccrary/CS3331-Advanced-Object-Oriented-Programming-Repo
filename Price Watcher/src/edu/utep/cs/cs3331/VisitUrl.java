@@ -13,6 +13,11 @@ import java.util.InputMismatchException;
 @SuppressWarnings("serial")
 public class VisitUrl extends Main
 {
+	public VisitUrl() throws IOException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	/** Returns true if URl is valid.
 	 * 
 	 * @param item The item which we want to visit its web store.

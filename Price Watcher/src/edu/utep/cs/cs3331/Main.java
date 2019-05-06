@@ -3,6 +3,7 @@ package edu.utep.cs.cs3331;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -10,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
+
 
 /**
 * A dialog for tracking the price of an item.
@@ -44,7 +46,7 @@ public class Main extends JFrame {
     private JLabel msgBar = new JLabel(" ");
 
     /** Create a new dialog. */
-    public Main() 
+    public Main() throws IOException
     {
     	this(DEFAULT_SIZE);
     }
@@ -52,8 +54,9 @@ public class Main extends JFrame {
     
     
     
-    /** Create a new dialog of the given screen dimension. */
-    public Main(Dimension dim) {
+    /** Create a new dialog of the given screen dimension. 
+     * @throws IOException */
+    public Main(Dimension dim) throws IOException {
         super("Price Watcher");
         setSize(dim);
         
@@ -127,7 +130,8 @@ public class Main extends JFrame {
         
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
+    	System.out.println("STARTING MAIN");
         new Main();
     }
     
