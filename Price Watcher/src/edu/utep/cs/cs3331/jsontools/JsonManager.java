@@ -186,41 +186,58 @@ public class JsonManager {
 	}
 	
 	public Item getDetailsFromString(String string) {
-		String originalPrice = string.substring(17, 34);
-		//System.out.println("Original Price: " + originalPrice);
-		int i = 43;
+		String originalPrice = "";
+		
+		int i = 17;
+		while(string.charAt(i) != ',') {
+			originalPrice += string.charAt(i);
+			i++;
+		}
+		System.out.println("Original Price: " + originalPrice);
+		
+		
+		i+=9;
 		String name = "";
 		while(string.charAt(i) != '"') {
 			name += string.charAt(i);
 			i++;
 		}
-		//System.out.println("Name: " + name);
-		i+=17;
+		System.out.println("Name: " + name);
 		
-		String currentPrice = string.substring(i, i+17);
-		//System.out.println("Current Price: " + currentPrice);
+		
+		
+		String currentPrice = "";
+		
 		i+=17;
+		while(string.charAt(i) != ',') {
+			currentPrice += string.charAt(i);
+			i++;
+		}
+		System.out.println("Current Price: " + currentPrice);
 		i+=8;
 		String url = "";
 		while(string.charAt(i) != '"') {
-			if(string.charAt(i) == '\\') {
-				i++;
-				continue;
-			}
 			url+=string.charAt(i);
 			i++;
 		}
-		//System.out.println("Url: " + url);
+		url = removeSlashes(url);
+		System.out.println("Url: " + url);
 		
 		i+=15;
 		
-		String dateAdded = string.substring(i, i+10);
+		String dateAdded = "";
+		while(string.charAt(i) != ' ' ) {
+			dateAdded += string.charAt(i);
+			i++;
+		}
 		dateAdded = removeSlashes(dateAdded);
-		//System.out.println("Date: " + dateAdded);
-		
-		i+=10;
+		System.out.println("Date: " + dateAdded);
 		
 		return new Item(name, url, Double.parseDouble(currentPrice), Double.parseDouble(originalPrice), dateAdded);
+		
+		
+		
+		
 	}
 	
 	String removeSlashes(String date) {
