@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
+import edu.utep.cs.cs3331.jsontools.JsonManager;
+
 
 /**
 * A dialog for tracking the price of an item.
@@ -40,6 +42,8 @@ public class Main extends JFrame {
     /** Reference to JPopupMenu.*/
     public JPopupMenu listPopupMenu;
     
+    /** Json Manager to get items from file*/
+    JsonManager jsonManager;
     
       
     /** Message bar to display various messages. */
@@ -59,9 +63,16 @@ public class Main extends JFrame {
     public Main(Dimension dim) throws IOException {
         super("Price Watcher");
         setSize(dim);
-        
         itemList = new ItemList(this);
         itemManager = new ItemManager(this);
+        jsonManager = new JsonManager();
+        Item[] itemsOnFile = jsonManager.readItemsFromFile();
+        System.out.println("There are " + jsonManager.getAmountOfItems() + " item(s) on file");
+        if(jsonManager.getAmountOfItems()>0) {
+        	// iterate through item array then add items
+        }
+        
+        
         menuBar = new MenuBar(this);
         toolBar = new ToolBar(this);
         itemDialogs = new ItemDialogs(this);

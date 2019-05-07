@@ -70,9 +70,11 @@ public class ItemList extends JPanel
 		listModel.addElement(item);
 		jsonManager.writeIntoFile(item);
 		
-		
 	}
 	
+	public void addToListNoWrite(Item item) {
+		listModel.addElement(item);
+	}
 	/** Removes item from list.
 	 * 
 	 * @param itemIndex The index of the item that is being removed.
