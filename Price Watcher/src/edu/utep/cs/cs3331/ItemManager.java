@@ -1,10 +1,18 @@
 package edu.utep.cs.cs3331;
+
+import java.io.IOException;
+
+import edu.utep.cs.cs3331.jsontools.JsonManager;
+
 /** Manages item objects
  * 
  * @author Timothy P. McCrary
  * */
 public class ItemManager
 {
+	
+	/** The JsonManager to be used to load items from file*/
+	private JsonManager jsonManager;
 	/** The access point to the main class.*/
 	private Main main;
 	
@@ -18,9 +26,16 @@ public class ItemManager
 	 * */
 	public ItemManager(Main main)
 	{
-		
+		try {
+			jsonManager = new JsonManager();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//Item[] itemsOnFile = jsonManager.readItemsFromFile();
 		this.main = main;
 		items = new Item[10];
+		
 	}
 	
 	/** Adds an item to the Item array and to the JList.
@@ -50,6 +65,35 @@ public class ItemManager
 		items[tempItems.length] = item;
 		numItems++;
 		main.getItemList().addToList(item);
+		//System.out.println(numItems);
+		tempItems = null;
+		return;
+	}
+	
+	public void addItemNoWrite(Item item)
+	{
+		for(int i = 0; i < items.length; i++)
+		{
+			if(items[i] == null)
+			{
+				items[i] = item;
+				numItems++;
+				main.getItemList().addToListNoWrite(item);
+				//System.out.println(numItems);
+				return;
+			}
+		}
+		
+		Item[] tempItems = items;
+		items = new Item[items.length + 5];
+		
+		for(int i = 0; i < tempItems.length; i++)
+		{
+			items[i] = tempItems[i];
+		}
+		items[tempItems.length] = item;
+		numItems++;
+		main.getItemList().addToListNoWrite(item);
 		//System.out.println(numItems);
 		tempItems = null;
 		return;
@@ -118,7 +162,7 @@ public class ItemManager
 			}
 		}
 	}
-	
+
 	
 	public Item[] getItems()
 	{

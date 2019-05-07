@@ -3,6 +3,7 @@ package edu.utep.cs.cs3331;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -10,6 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
+
+import edu.utep.cs.cs3331.jsontools.JsonManager;
+
 
 /**
 * A dialog for tracking the price of an item.
@@ -38,13 +42,15 @@ public class Main extends JFrame {
     /** Reference to JPopupMenu.*/
     public JPopupMenu listPopupMenu;
     
+    /** Json Manager to get items from file*/
+    JsonManager jsonManager;
     
       
     /** Message bar to display various messages. */
     private JLabel msgBar = new JLabel(" ");
 
     /** Create a new dialog. */
-    public Main() 
+    public Main() throws IOException
     {
     	this(DEFAULT_SIZE);
     }
@@ -52,13 +58,35 @@ public class Main extends JFrame {
     
     
     
-    /** Create a new dialog of the given screen dimension. */
-    public Main(Dimension dim) {
+    /** Create a new dialog of the given screen dimension. 
+     * @throws IOException */
+    public Main(Dimension dim) throws IOException {
         super("Price Watcher");
         setSize(dim);
-        
         itemList = new ItemList(this);
         itemManager = new ItemManager(this);
+        jsonManager = new JsonManager();
+        Item[] itemsOnFile = jsonManager.readItemsFromFile();
+        System.out.println("There are " + jsonManager.getAmountOfItems() + " item(s) on file");
+        if(jsonManager.getAmountOfItems()>0) {
+        	for(int i=0; i<jsonManager.getAmountOfItems(); i++){
+        		
+        		
+        		String name = itemsOnFile[i].getItemName();
+        		String url = itemsOnFile[i].getUrl();
+        		Double currentPrice = itemsOnFile[i].getCurrentPrice();
+        		Double originalPrice = itemsOnFile[i].getOriginalPrice();
+        		String dateAdded = itemsOnFile[i].getDateAdded();
+        		
+        		Item fileItem = new Item(name, url, currentPrice, originalPrice, dateAdded);
+        		
+        		
+        		itemManager.addItemNoWrite(fileItem);
+        		
+        	}
+        }
+        
+        
         menuBar = new MenuBar(this);
         toolBar = new ToolBar(this);
         itemDialogs = new ItemDialogs(this);
@@ -127,7 +155,8 @@ public class Main extends JFrame {
         
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
+    	System.out.println("STARTING MAIN");
         new Main();
     }
     

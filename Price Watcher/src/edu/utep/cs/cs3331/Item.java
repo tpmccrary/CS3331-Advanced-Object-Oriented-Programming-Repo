@@ -2,6 +2,12 @@ package edu.utep.cs.cs3331;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.simple.JSONObject;
+
+import java.util.Map;
 
 /** Class that stores item details.
  * 
@@ -28,6 +34,17 @@ public class Item
 	 * @param url The URL the item will be given
 	 * @param currentPrice The price the item will be given. 
 	 * */
+	
+	/** Special constructor to be used when reading from JSON file*/
+	public Item(String itemName, String url, double currentPrice, double originalPrice, String dateAdded) 
+	{
+		this.itemName = itemName;
+		this.url = url;
+		this.currentPrice = currentPrice;
+		this.originalPrice = originalPrice;
+		this.dateAdded = dateAdded;
+	}
+	
 	public Item(String itemName, String url, double currentPrice)
 	{
 		this.itemName = itemName;
@@ -126,5 +143,6 @@ public class Item
 	{
 		return itemName;
 	}
+	
 	
 }
