@@ -34,5 +34,21 @@ public class VisitUrl extends Main
 		return true;
 	}
 	
+	public static boolean validateURL(String url)
+	{
+		try
+		{
+			new URL(url).toURI();
+		} 
+		catch (IOException | URISyntaxException | InputMismatchException e)
+		{
+			//System.out.println("Not a valid URL.");
+			return false;
+			
+		}
+		
+		return true;
+	}
+	
 	
 }

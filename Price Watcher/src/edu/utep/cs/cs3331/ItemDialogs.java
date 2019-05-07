@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 /** Class that creates all dialogs for application.
@@ -50,8 +51,15 @@ public class ItemDialogs
 		JLabel nameLabel = new JLabel("Name:");
 		JLabel urlLabel = new JLabel("URL:");
 		
-		JTextArea nameTextArea = new JTextArea("", 1, 15);
-		JTextArea urlTextArea = new JTextArea("https://", 1, 15);
+		JTextArea nameTextArea = new JTextArea("", 2, 15);
+		JScrollPane nameScrollPane = new JScrollPane(nameTextArea);
+		JTextArea urlTextArea = new JTextArea("https://", 2, 15);
+		JScrollPane urlScrollPane = new JScrollPane(urlTextArea);
+		
+		JLabel supportedStores = new JLabel("Supported Stores:");
+		JLabel supportedStoresCont = new JLabel("Amazon, newegg, and AC lens");
+		
+		//String webStores[] = {"Amazon", "BesyBuy"}
 		
 		nameTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
 		urlTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
@@ -64,14 +72,21 @@ public class ItemDialogs
 			public void actionPerformed(ActionEvent e)
 			{
 				itemName = nameTextArea.getText();
-				nameTextArea.setText("");
+				
 				
 				itemUrl = urlTextArea.getText();
-				urlTextArea.setText("");
 				
-				main.getItemManager().addItem(new Item(itemName, itemUrl, PriceFinder.getPrice()));
+				//System.out.println(VisitUrl.validateURL(itemUrl));
+				if(VisitUrl.validateURL(itemUrl) == true)
+				{
+					main.getItemManager().addItem(new Item(itemName, itemUrl, WebPriceFinder.findPrice(itemUrl)));
+					
+					frame.dispose();
+					return;
+				}
 				
-				frame.dispose();
+				notValidUrlDialog();
+				
 			}
 		});
 		
@@ -87,9 +102,11 @@ public class ItemDialogs
 		
 		
 		dialog.add(nameLabel);
-		dialog.add(nameTextArea);
+		dialog.add(nameScrollPane);
 		dialog.add(urlLabel);
-		dialog.add(urlTextArea);
+		dialog.add(urlScrollPane);
+		dialog.add(supportedStores);
+		dialog.add(supportedStoresCont);
 		dialog.add(addButton);
 		dialog.add(cancelButton);
 		dialog.setSize(250, 300);
@@ -136,8 +153,10 @@ public class ItemDialogs
 		JLabel nameLabel = new JLabel("Name:");
 		JLabel urlLabel = new JLabel("URL:");
 		
-		JTextArea nameTextArea = new JTextArea(main.getItemManager().getItems()[itemIndex].getItemName(), 1, 15);
-		JTextArea urlTextArea = new JTextArea(main.getItemManager().getItems()[itemIndex].getUrl(), 1, 15);
+		JTextArea nameTextArea = new JTextArea(main.getItemManager().getItems()[itemIndex].getItemName(), 2, 15);
+		JScrollPane nameScrollPane = new JScrollPane(nameTextArea);
+		JTextArea urlTextArea = new JTextArea(main.getItemManager().getItems()[itemIndex].getUrl(), 2, 15);
+		JScrollPane urlScrollPane = new JScrollPane(urlTextArea);
 		
 		nameTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
 		urlTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
@@ -177,15 +196,25 @@ public class ItemDialogs
 		
 		
 		dialog.add(nameLabel);
-		dialog.add(nameTextArea);
+		dialog.add(nameScrollPane);
 		dialog.add(urlLabel);
-		dialog.add(urlTextArea);
+		dialog.add(urlScrollPane);
 		dialog.add(confirmButton);
 		dialog.add(cancelButton);
 		dialog.setSize(250, 300);
 		dialog.setResizable(false);
 		dialog.setLocationRelativeTo(main.getContentPane());
 		dialog.setVisible(true);
+		
+	}
+	
+	public void notValidUrlDialog()
+	{
+		
+		JOptionPane.showMessageDialog(null, "Not a valid URL.\nExample: \"https://www.bing.com\"");
+		
+		return;
+		
 		
 	}
 	
