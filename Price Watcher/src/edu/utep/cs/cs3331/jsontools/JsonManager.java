@@ -266,7 +266,9 @@ public class JsonManager {
 		}
 		return temp;
 	}
-	public void removeItemFromFile(Item item) {
+	public void removeItemFromFile(String url) {
+		//TODO: Remove from file.
+		
 		return;
 	}
 	

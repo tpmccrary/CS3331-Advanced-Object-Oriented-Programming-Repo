@@ -130,6 +130,7 @@ public class ItemDialogs
 		
 		if(response == JOptionPane.YES_OPTION)
 		{
+			main.jsonManager.removeItemFromFile(main.getItemManager().getItems()[itemIndex].getUrl());
 			main.getItemManager().removeItem(itemIndex);
 			return;
 		}
