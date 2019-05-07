@@ -78,7 +78,7 @@ public class ItemManager
 			{
 				items[i] = item;
 				numItems++;
-				main.getItemList().addToList(item);
+				main.getItemList().addToListNoWrite(item);
 				//System.out.println(numItems);
 				return;
 			}
@@ -162,7 +162,7 @@ public class ItemManager
 			}
 		}
 	}
-	
+
 	
 	public Item[] getItems()
 	{

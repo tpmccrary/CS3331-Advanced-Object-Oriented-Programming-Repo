@@ -69,7 +69,21 @@ public class Main extends JFrame {
         Item[] itemsOnFile = jsonManager.readItemsFromFile();
         System.out.println("There are " + jsonManager.getAmountOfItems() + " item(s) on file");
         if(jsonManager.getAmountOfItems()>0) {
-        	// iterate through item array then add items
+        	for(int i=0; i<jsonManager.getAmountOfItems(); i++){
+        		
+        		
+        		String name = itemsOnFile[i].getItemName();
+        		String url = itemsOnFile[i].getUrl();
+        		Double currentPrice = itemsOnFile[i].getCurrentPrice();
+        		Double originalPrice = itemsOnFile[i].getOriginalPrice();
+        		String dateAdded = itemsOnFile[i].getDateAdded();
+        		
+        		Item fileItem = new Item(name, url, currentPrice, originalPrice, dateAdded);
+        		
+        		
+        		itemManager.addItemNoWrite(fileItem);
+        		
+        	}
         }
         
         
