@@ -12,6 +12,7 @@ public class ItemManager
 {
 	
 	/** The JsonManager to be used to load items from file*/
+	@SuppressWarnings("unused")
 	private JsonManager jsonManager;
 	/** The access point to the main class.*/
 	private Main main;

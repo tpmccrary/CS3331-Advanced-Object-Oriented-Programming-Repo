@@ -12,7 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import edu.utep.cs.cs3331.jsontools.JsonManager;
-import org.json.simple.*;
 /**
 * Class that creates list to display the items.
 *

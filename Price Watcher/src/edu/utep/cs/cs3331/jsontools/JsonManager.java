@@ -6,13 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.json.simple.JSONArray;
+
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
 
 import edu.utep.cs.cs3331.Item;
 
@@ -135,7 +132,7 @@ public class JsonManager {
 		// max of 100 items
 		Item[] itemArray = new Item[100];
 		
-		JSONParser jsonParser = new JSONParser();
+		//JSONParser jsonParser = new JSONParser();
 		
 		try {
 			FileReader fileReader = new FileReader("File.json");
@@ -186,39 +183,75 @@ public class JsonManager {
 	}
 	
 	public Item getDetailsFromString(String string) {
-		String originalPrice = string.substring(17, 34);
+		String originalPrice = "";
 		//System.out.println("Original Price: " + originalPrice);
-		int i = 43;
+		int i = 17;
+		while(string.charAt(i) != ',')
+		{
+			originalPrice += string.charAt(i);
+			i++;
+		}
+		
 		String name = "";
-		while(string.charAt(i) != '"') {
+		while(string.charAt(i) != ':') 
+		{
+			i++;
+		}
+		
+		i++;
+		i++;
+		
+		while(string.charAt(i) != '"')
+		{
 			name += string.charAt(i);
 			i++;
 		}
-		//System.out.println("Name: " + name);
-		i+=17;
 		
-		String currentPrice = string.substring(i, i+17);
-		//System.out.println("Current Price: " + currentPrice);
-		i+=17;
-		i+=8;
-		String url = "";
-		while(string.charAt(i) != '"') {
-			if(string.charAt(i) == '\\') {
-				i++;
-				continue;
-			}
-			url+=string.charAt(i);
+		while(string.charAt(i) != ':') 
+		{
 			i++;
 		}
-		//System.out.println("Url: " + url);
+		i++;
 		
-		i+=15;
+		String currentPrice = "";
+		while(string.charAt(i) != ',')
+		{
+			currentPrice +=string.charAt(i);
+			i++;
+		}
 		
-		String dateAdded = string.substring(i, i+10);
+		while(string.charAt(i) != ':') 
+		{
+			i++;
+		}
+		i++;
+		i++;
+		
+		String url = "";
+		while(string.charAt(i) != '"')
+		{
+			url += string.charAt(i);
+			i++;
+		}
+		
+		
+		while(string.charAt(i) != ':') 
+		{
+			i++;
+		}
+		
+		i++;
+		i++;
+		
+		String dateAdded = "";
+		while(string.charAt(i) != '"')
+		{
+			dateAdded += string.charAt(i);
+			i++;
+		}
+		
+		url = removeSlashes(url);
 		dateAdded = removeSlashes(dateAdded);
-		//System.out.println("Date: " + dateAdded);
-		
-		i+=10;
 		
 		return new Item(name, url, Double.parseDouble(currentPrice), Double.parseDouble(originalPrice), dateAdded);
 	}

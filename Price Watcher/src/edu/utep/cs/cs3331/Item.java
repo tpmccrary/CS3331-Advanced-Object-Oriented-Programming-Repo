@@ -2,12 +2,6 @@ package edu.utep.cs.cs3331;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.json.simple.JSONObject;
-
-import java.util.Map;
 
 /** Class that stores item details.
  * 
