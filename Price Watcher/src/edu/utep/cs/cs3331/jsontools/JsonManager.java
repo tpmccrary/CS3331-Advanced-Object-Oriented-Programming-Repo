@@ -298,7 +298,7 @@ public class JsonManager {
 				//System.out.println("line is set to " + line);
 				//System.out.println("itemLine is set to " + itemLine);
 				//System.out.println("ENTERING findOpenBracketPosition(String)");
-				openBracketPosition = findOpenBracketPosition(itemLine, url);
+				openBracketPosition = findOpenBracketPosition(line, url);
 				
 				if(openBracketPosition == -1) {
 					System.out.println("Item not found in line...");
@@ -376,7 +376,7 @@ public class JsonManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		System.out.println("Deleted item from file!");
 		return;
 	}
 	public int findOpenBracketPosition(String jsonString, String url) {
@@ -409,9 +409,9 @@ public class JsonManager {
 					
 				}
 				else {
-					System.out.println("URL DOES NOT MATCH");
-					System.out.println("Given: " + url);
-					System.out.println("Looking for: " + currentUrl);
+					//System.out.println("URL DOES NOT MATCH");
+					//System.out.println("Given: " + url);
+					//System.out.println("Looking for: " + currentUrl);
 					currentUrl = "";
 				}
 			}
