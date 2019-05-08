@@ -269,9 +269,157 @@ public class JsonManager {
 	public void removeItemFromFile(String url) {
 		//TODO: Remove from file.
 		
+		int openBracketPosition = 0;
+		
+		//System.out.println("ENTERING METHOD TO TEST");
+		FileReader filereader = null;
+		try {
+			/** Start reading the file */
+			//System.out.println("CREATING FILEREADER");
+			filereader = new FileReader("File.json");
+			BufferedReader bufferedReader = new BufferedReader(filereader);
+			
+			int i = 0;
+			/* Read the line */
+			//System.out.println("ENTERING WHILE LOOP");
+			line = bufferedReader.readLine();
+			while(true) {
+				
+				String itemLine = "";
+				
+				while(i < line.length() && line.charAt(i) != '}') {
+					itemLine+=line.charAt(i);
+					i++;
+				}
+				if(i>=line.length()) {
+					return;
+				}
+				
+				//System.out.println("line is set to " + line);
+				//System.out.println("itemLine is set to " + itemLine);
+				//System.out.println("ENTERING findOpenBracketPosition(String)");
+				openBracketPosition = findOpenBracketPosition(itemLine, url);
+				
+				if(openBracketPosition == -1) {
+					System.out.println("Item not found in line...");
+					itemLine = "";
+					i++;
+				}
+				else {
+					//System.out.println("Opening bracket of item is " + openBracketPosition);
+					break;
+				}
+			}
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("File not found!");
+		}
+		
+		String stringToWrite = "";
+		
+		try {
+			
+			boolean itemToAvoid = false;
+			// Write into the temp file, but dont write the item that was deleted
+			FileWriter tempWriter = new FileWriter("tempFile.json");
+			
+			FileReader fileReader = new FileReader("File.json");
+			bufferedReader = new BufferedReader(fileReader);
+			
+			line = bufferedReader.readLine();
+			//System.out.println("LINE IS SET TO :" + line);
+			for(int i=0; i<line.length(); i++){
+				//System.out.println("I IS AT : " + i);
+				if(i==openBracketPosition) {
+					//System.out.println("Item to avoid is set to true" );
+					itemToAvoid = true;
+				}
+				if(itemToAvoid) {
+					if(line.charAt(i) == '}') {
+						//System.out.println("Item to avoid is set to false");
+						itemToAvoid = false;
+						i++;
+					}
+				}
+				
+				if(!itemToAvoid && i < line.length()) {
+					//System.out.println("Currently Writing " + line.charAt(i));
+					//System.out.println("Line length is " + line.length());
+					tempWriter.write(line.charAt(i));
+				}
+			}
+			
+			tempWriter.close();
+			
+			FileWriter fileWriter = new FileWriter("File.json");
+			
+			fileReader = new FileReader("tempFile.json");
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			
+			
+			
+			line = bufferedReader.readLine();
+			//System.out.println("LINE IS SET TO " + line);
+			if(line == null) {
+				System.out.println("Items file is empty");
+				return;
+			}
+			//System.out.println("LENGTH OF LINE IS " + line.length());
+			for(int i=0; i<line.length(); i++) {
+				fileWriter.write(line.charAt(i));
+			}
+			
+			fileWriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return;
 	}
-	
+	public int findOpenBracketPosition(String jsonString, String url) {
+		int urlStartIndex = 0;
+		String currentUrl = "";
+		
+		/** Iterate through the string */
+		for(int i=0; i<jsonString.length(); i++) {
+			/** look for the "url": part */
+			if(jsonString.substring(i, i+6).equals("\"url\":")) {
+				//System.out.println("FOUND MATCH");
+				/** Set the position of i so that it starts to read the url*/
+				i+=7;
+				/** Add to the currentUrl string */
+				while(jsonString.charAt(i) != '"') {
+					currentUrl+=jsonString.charAt(i);
+					i++;
+				}
+				
+				currentUrl = removeSlashes(currentUrl);
+				/* If the url matches, traverse backwards until an open bracket is found */
+				if(currentUrl.equals(url)) {
+					//System.out.println("URL MATCHES");
+					//TODO CONTINUE WORK HERE!!
+					while(jsonString.charAt(i) != '{') {
+						i--;
+					}
+					//System.out.println("Position of open bracket is " + i);
+					return i;
+					
+				}
+				else {
+					System.out.println("URL DOES NOT MATCH");
+					System.out.println("Given: " + url);
+					System.out.println("Looking for: " + currentUrl);
+					currentUrl = "";
+				}
+			}
+			//System.out.println("substring = " + jsonString.substring(i, i+6));
+			
+		}
+		return -1;
+	}
 	public int getAmountOfItems() {
 		return amountOfItems;
 	}

@@ -22,7 +22,6 @@ import edu.utep.cs.cs3331.jsontools.JsonManager;
 */
 @SuppressWarnings("serial")
 public class Main extends JFrame {
-
     /** Default dimension of the dialog. */
     private final static Dimension DEFAULT_SIZE = new Dimension(500, 700);
     
